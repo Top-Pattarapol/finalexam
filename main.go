@@ -1,9 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-
 	"github.com/Top-Pattarapol/finalexam/database"
 	"github.com/Top-Pattarapol/finalexam/service/customer"
 
@@ -24,23 +21,13 @@ func main() {
 
 func serRoute(h *customer.Handler) *gin.Engine {
 	r := gin.Default()
-	r.Use(authMiddlewere)
+	r.Use(h.AuthMiddlewere)
 	r.GET("/customers", h.Get)
 	r.GET("/customers/:id", h.GetById)
 	r.POST("/customers", h.Post)
 	r.DELETE("/customers/:id", h.DeleteById)
 	r.PUT("/customers/:id", h.Update)
 	return r
-}
-
-func authMiddlewere(c *gin.Context) {
-	fmt.Println("begining middlewere")
-	if token := c.GetHeader("Authorization"); token != "token2019" {
-		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": http.StatusText(http.StatusUnauthorized)})
-		return
-	}
-	c.Next()
-	fmt.Println("after end middlewere")
 }
 
 func getPort() string {

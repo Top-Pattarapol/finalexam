@@ -1,9 +1,23 @@
 package customer
 
 import (
+	"fmt"
+	"net/http"
+
 	"github.com/Top-Pattarapol/finalexam/database"
+	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {
 	Db *database.Handler
+}
+
+func (h *Handler) AuthMiddlewere(c *gin.Context) {
+	fmt.Println("begining middlewere")
+	if token := c.GetHeader("Authorization"); token != "token2019" {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": http.StatusText(http.StatusUnauthorized)})
+		return
+	}
+	c.Next()
+	fmt.Println("after end middlewere")
 }

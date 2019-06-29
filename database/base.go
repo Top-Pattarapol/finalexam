@@ -8,14 +8,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-type base interface {
-	connect() *sql.DB
-	baseExec(db *sql.DB, query string, args ...interface{}) error
-	baseQuery(db *sql.DB, query string, args ...interface{}) (*sql.Rows, error)
-	baseQueryRow(db *sql.DB, query string, args ...interface{}) (*sql.Row, error)
-}
-
-func connect() *sql.DB {
+func Connect() *sql.DB {
 	database, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		log.Fatal(err.Error())

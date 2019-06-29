@@ -6,11 +6,10 @@ import (
 	"github.com/Top-Pattarapol/finalexam/model"
 	"github.com/Top-Pattarapol/finalexam/utility"
 
-	"github.com/Top-Pattarapol/finalexam/database"
 	"github.com/gin-gonic/gin"
 )
 
-func GetById(c *gin.Context) {
+func (h *Handler) GetById(c *gin.Context) {
 
 	id, err := utility.ParamToInt(c, "id")
 
@@ -19,7 +18,7 @@ func GetById(c *gin.Context) {
 		return
 	}
 
-	row, err := database.GetCustomerById(id)
+	row, err := h.Db.GetCustomerById(id)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})

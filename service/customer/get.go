@@ -6,13 +6,12 @@ import (
 
 	"github.com/Top-Pattarapol/finalexam/model"
 
-	"github.com/Top-Pattarapol/finalexam/database"
 	"github.com/gin-gonic/gin"
 )
 
-func Get(c *gin.Context) {
+func (h *Handler) Get(c *gin.Context) {
 
-	rows, err := database.GetCustomers()
+	rows, err := h.Db.GetCustomers()
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})

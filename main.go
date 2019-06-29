@@ -11,19 +11,25 @@ import (
 )
 
 func main() {
-	database.CreateCustomerTable()
-	r := serRoute()
+	db := &database.Handler{}
+	db.Db = database.Connect()
+	defer db.Db.Close()
+
+	h := &customer.Handler{}
+	h.Db = db
+
+	r := serRoute(h)
 	r.Run(getPort())
 }
 
-func serRoute() *gin.Engine {
+func serRoute(h *customer.Handler) *gin.Engine {
 	r := gin.Default()
 	r.Use(authMiddlewere)
-	r.GET("/customers", customer.Get)
-	r.GET("/customers/:id", customer.GetById)
-	r.POST("/customers", customer.Post)
-	r.DELETE("/customers/:id", customer.DeleteById)
-	r.PUT("/customers/:id", customer.Update)
+	r.GET("/customers", h.Get)
+	r.GET("/customers/:id", h.GetById)
+	r.POST("/customers", h.Post)
+	r.DELETE("/customers/:id", h.DeleteById)
+	r.PUT("/customers/:id", h.Update)
 	return r
 }
 

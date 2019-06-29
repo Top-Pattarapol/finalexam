@@ -3,13 +3,12 @@ package customer
 import (
 	"net/http"
 
-	"github.com/Top-Pattarapol/finalexam/model"
 	"github.com/gin-gonic/gin"
 )
 
 func (h *Handler) Post(c *gin.Context) {
 
-	t := &model.Customer{}
+	t := &Customer{}
 
 	if err := c.BindJSON(t); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": http.StatusText(http.StatusBadRequest)})
@@ -17,7 +16,7 @@ func (h *Handler) Post(c *gin.Context) {
 	}
 
 	var id int
-	row, err := h.Db.PostCustomers(t)
+	row, err := h.Db.PostCustomers(t.Id, t.Name, t.Email)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})
 	}

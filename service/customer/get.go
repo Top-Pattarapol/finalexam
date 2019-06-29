@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Top-Pattarapol/finalexam/model"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,10 +16,10 @@ func (h *Handler) Get(c *gin.Context) {
 		return
 	}
 
-	todos := []model.Customer{}
+	todos := []Customer{}
 
 	for rows.Next() {
-		t := model.Customer{}
+		t := Customer{}
 		err := rows.Scan(&t.Id, &t.Name, &t.Email, &t.Status)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})

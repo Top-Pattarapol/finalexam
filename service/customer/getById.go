@@ -3,7 +3,6 @@ package customer
 import (
 	"net/http"
 
-	"github.com/Top-Pattarapol/finalexam/model"
 	"github.com/Top-Pattarapol/finalexam/utility"
 
 	"github.com/gin-gonic/gin"
@@ -24,7 +23,7 @@ func (h *Handler) GetById(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})
 		return
 	}
-	t := model.Customer{}
+	t := Customer{}
 	err = row.Scan(&t.Id, &t.Name, &t.Email, &t.Status)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})

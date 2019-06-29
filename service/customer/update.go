@@ -3,7 +3,6 @@ package customer
 import (
 	"net/http"
 
-	"github.com/Top-Pattarapol/finalexam/model"
 	"github.com/Top-Pattarapol/finalexam/utility"
 
 	"github.com/gin-gonic/gin"
@@ -18,7 +17,7 @@ func (h *Handler) Update(c *gin.Context) {
 		return
 	}
 
-	t := &model.Customer{}
+	t := &Customer{}
 
 	if err := c.BindJSON(t); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": http.StatusText(http.StatusBadRequest)})

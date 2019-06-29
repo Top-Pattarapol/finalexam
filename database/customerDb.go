@@ -3,8 +3,6 @@ package database
 import (
 	"database/sql"
 	"log"
-
-	"github.com/Top-Pattarapol/finalexam/model"
 )
 
 type Handler struct {
@@ -26,8 +24,8 @@ func (h *Handler) GetCustomerById(id int) (*sql.Row, error) {
 	return baseQueryRow(h.Db, `Select id, name, email, status FROM customers WHERE id=$1 ORDER BY id ASC`, id)
 }
 
-func (h *Handler) PostCustomers(c *model.Customer) (*sql.Row, error) {
-	return baseQueryRow(h.Db, `INSERT INTO customers (name, email, status) VALUES ($1, $2, $3) RETURNING id`, c.Id, c.Name, c.Email)
+func (h *Handler) PostCustomers(id int, name string, email string) (*sql.Row, error) {
+	return baseQueryRow(h.Db, `INSERT INTO customers (name, email, status) VALUES ($1, $2, $3) RETURNING id`, id, name, email)
 }
 
 func (h *Handler) DeleteCustomerById(id int) error {

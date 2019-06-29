@@ -15,7 +15,7 @@ func (h *Handler) Get(c *gin.Context) {
 		return
 	}
 
-	todos := []Customer{}
+	customers := []Customer{}
 
 	for rows.Next() {
 		t := Customer{}
@@ -24,7 +24,7 @@ func (h *Handler) Get(c *gin.Context) {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})
 			return
 		}
-		todos = append(todos, t)
+		customers = append(customers, t)
 	}
-	c.JSON(http.StatusOK, todos)
+	c.JSON(http.StatusOK, customers)
 }

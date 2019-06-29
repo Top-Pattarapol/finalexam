@@ -19,7 +19,7 @@ func TestParamToInt(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "success",
+			name: "ParamToInt",
 			args: args{
 				c: &gin.Context{
 					Params: gin.Params{

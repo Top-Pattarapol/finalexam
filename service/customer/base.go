@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Top-Pattarapol/finalexam/database"
+	customerDb "github.com/Top-Pattarapol/finalexam/database/customer"
 	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {
-	Db *database.Handler
+	Db *customerDb.Handler
 }
 
 func (h *Handler) AuthMiddlewere(c *gin.Context) {

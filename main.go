@@ -2,13 +2,14 @@ package main
 
 import (
 	"github.com/Top-Pattarapol/finalexam/database"
+	customerDb "github.com/Top-Pattarapol/finalexam/database/customer"
 	"github.com/Top-Pattarapol/finalexam/service/customer"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	db := &database.Handler{}
+	db := &customerDb.Handler{}
 	db.Db = database.Connect()
 	defer db.Db.Close()
 

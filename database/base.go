@@ -17,7 +17,7 @@ func Connect() *sql.DB {
 	return database
 }
 
-func baseExec(db *sql.DB, query string, args ...interface{}) error {
+func BaseExec(db *sql.DB, query string, args ...interface{}) error {
 	stmt, err := db.Prepare(query)
 	if err != nil {
 		return err
@@ -29,7 +29,7 @@ func baseExec(db *sql.DB, query string, args ...interface{}) error {
 	return nil
 }
 
-func baseQuery(db *sql.DB, query string, args ...interface{}) (*sql.Rows, error) {
+func BaseQuery(db *sql.DB, query string, args ...interface{}) (*sql.Rows, error) {
 	stmt, err := db.Prepare(query)
 	if err != nil {
 		return nil, err
@@ -41,7 +41,7 @@ func baseQuery(db *sql.DB, query string, args ...interface{}) (*sql.Rows, error)
 	return rows, err
 }
 
-func baseQueryRow(db *sql.DB, query string, args ...interface{}) (*sql.Row, error) {
+func BaseQueryRow(db *sql.DB, query string, args ...interface{}) (*sql.Row, error) {
 	stmt, err := db.Prepare(query)
 	if err != nil {
 		return nil, err

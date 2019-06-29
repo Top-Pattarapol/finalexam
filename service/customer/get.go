@@ -1,7 +1,6 @@
 package customer
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -27,7 +26,5 @@ func (h *Handler) Get(c *gin.Context) {
 		}
 		todos = append(todos, t)
 	}
-
-	fmt.Println(todos)
 	c.JSON(http.StatusOK, todos)
 }

@@ -19,11 +19,11 @@ func main() {
 func serRoute() *gin.Engine {
 	r := gin.Default()
 	r.Use(authMiddlewere)
-	r.GET("/customers", customer.GetTodos)
-	r.GET("/customers/:id", customer.GetCustomersById)
-	r.POST("/customers", customer.PostCustomers)
-	r.DELETE("/customers/:id", customer.DeleteCustomersById)
-	r.PUT("/customers/:id", customer.UpdateCustomer)
+	r.GET("/customers", customer.Get)
+	r.GET("/customers/:id", customer.GetById)
+	r.POST("/customers", customer.Post)
+	r.DELETE("/customers/:id", customer.DeleteById)
+	r.PUT("/customers/:id", customer.Update)
 	return r
 }
 

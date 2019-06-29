@@ -2,14 +2,18 @@ package database
 
 import (
 	"database/sql"
+	"log"
 
 	"github.com/Top-Pattarapol/finalexam/model"
 )
 
-func CreateCustomerTable() error {
+func CreateCustomerTable() {
 	db := connect()
 	defer db.Close()
-	return baseExec(db, `CREATE TABLE IF NOT EXISTS customers( id SERIAL PRIMARY KEY, name TEXT, email TEXT, status TEXT );`)
+	err := baseExec(db, `CREATE TABLE IF NOT EXISTS customers( id SERIAL PRIMARY KEY, name TEXT, email TEXT, status TEXT );`)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }
 
 func GetCustomers() (*sql.Rows, error) {

@@ -8,17 +8,25 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func Connect() *sql.DB {
+type Handler struct {
+	Db *sql.DB
+}
+
+func (h *Handler) Open() {
 	database, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		log.Fatal(err.Error())
-		return nil
+		return
 	}
-	return database
+	h.Db = database
 }
 
-func BaseExec(db *sql.DB, query string, args ...interface{}) error {
-	stmt, err := db.Prepare(query)
+func (h *Handler) Close() {
+	h.Db.Close()
+}
+
+func (h *Handler) BaseExec(query string, args ...interface{}) error {
+	stmt, err := h.Db.Prepare(query)
 	if err != nil {
 		return err
 	}
@@ -29,8 +37,8 @@ func BaseExec(db *sql.DB, query string, args ...interface{}) error {
 	return nil
 }
 
-func BaseQuery(db *sql.DB, query string, args ...interface{}) (*sql.Rows, error) {
-	stmt, err := db.Prepare(query)
+func (h *Handler) BaseQuery(query string, args ...interface{}) (*sql.Rows, error) {
+	stmt, err := h.Db.Prepare(query)
 	if err != nil {
 		return nil, err
 	}
@@ -41,8 +49,8 @@ func BaseQuery(db *sql.DB, query string, args ...interface{}) (*sql.Rows, error)
 	return rows, err
 }
 
-func BaseQueryRow(db *sql.DB, query string, args ...interface{}) (*sql.Row, error) {
-	stmt, err := db.Prepare(query)
+func (h *Handler) BaseQueryRow(query string, args ...interface{}) (*sql.Row, error) {
+	stmt, err := h.Db.Prepare(query)
 	if err != nil {
 		return nil, err
 	}

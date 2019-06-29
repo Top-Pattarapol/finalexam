@@ -1,20 +1,15 @@
 package main
 
 import (
-	"github.com/Top-Pattarapol/finalexam/database"
-	customerDb "github.com/Top-Pattarapol/finalexam/database/customer"
 	"github.com/Top-Pattarapol/finalexam/service/customer"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	db := &customerDb.Handler{}
-	db.Db = database.Connect()
-	defer db.Db.Close()
-
 	h := &customer.Handler{}
-	h.Db = db
+	h.Init()
+	defer h.Close()
 
 	r := serRoute(h)
 	r.Run(getPort())

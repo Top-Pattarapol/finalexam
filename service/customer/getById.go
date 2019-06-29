@@ -17,7 +17,7 @@ func (h *Handler) GetById(c *gin.Context) {
 		return
 	}
 
-	row, err := h.Db.GetCustomerById(id)
+	row, err := h.GetCustomerById(id)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})

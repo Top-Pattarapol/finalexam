@@ -16,7 +16,7 @@ func (h *Handler) Post(c *gin.Context) {
 	}
 
 	var id int
-	row, err := h.Db.PostCustomers(t.Id, t.Name, t.Email)
+	row, err := h.PostCustomers(t.Id, t.Name, t.Email)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})
 	}

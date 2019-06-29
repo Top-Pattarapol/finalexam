@@ -16,7 +16,7 @@ func (h *Handler) DeleteById(c *gin.Context) {
 		return
 	}
 
-	err = h.Db.DeleteCustomerById(id)
+	err = h.DeleteCustomerById(id)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})

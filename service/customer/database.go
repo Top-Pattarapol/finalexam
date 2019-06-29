@@ -1,25 +1,9 @@
-package customerDb
+package customer
 
 import (
 	"database/sql"
 	"log"
-
-	"github.com/Top-Pattarapol/finalexam/database"
 )
-
-type Handler struct {
-	database *database.Handler
-}
-
-func (h *Handler) Init() {
-	database := &database.Handler{}
-	h.database = database
-	h.database.Open()
-}
-
-func (h *Handler) Close() {
-	h.database.Close()
-}
 
 func (h *Handler) CreateCustomerTable() {
 	err := h.database.BaseExec(`CREATE TABLE IF NOT EXISTS customers( id SERIAL PRIMARY KEY, name TEXT, email TEXT, status TEXT );`)

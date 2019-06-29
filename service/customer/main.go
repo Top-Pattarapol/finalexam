@@ -3,22 +3,23 @@ package customer
 import (
 	"net/http"
 
-	customerDb "github.com/Top-Pattarapol/finalexam/database/customer"
+	"github.com/Top-Pattarapol/finalexam/database"
 	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {
-	Db *customerDb.Handler
+	database *database.Handler
 }
 
 func (h *Handler) Init() {
-	db := &customerDb.Handler{}
-	h.Db = db
-	h.Db.Init()
+	database := &database.Handler{}
+	h.database = database
+	h.database.Open()
+	h.CreateCustomerTable()
 }
 
 func (h *Handler) Close() {
-	h.Db.Close()
+	h.database.Close()
 }
 
 func (h *Handler) AuthMiddlewere(c *gin.Context) {

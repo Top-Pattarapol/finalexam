@@ -26,7 +26,7 @@ func (h *Handler) Update(c *gin.Context) {
 
 	t.Id = id
 
-	err = h.Db.UpdateCustomer(id, t.Name, t.Email, t.Status)
+	err = h.UpdateCustomer(id, t.Name, t.Email, t.Status)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})

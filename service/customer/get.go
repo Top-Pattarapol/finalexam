@@ -8,7 +8,7 @@ import (
 
 func (h *Handler) Get(c *gin.Context) {
 
-	rows, err := h.Db.GetCustomers()
+	rows, err := h.GetCustomers()
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})
